@@ -33,6 +33,7 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server: #配置属性，但由于 Eureka 自我保护模式以及心跳周期长的原因，经常会遇到 Eureka Server 不剔除已关停的节点的问题
     enable-self-preservation: true
+    # 该配置可以修改检查失效服务的时间，每隔120s检查失效服务，并移除列表 (Spring Cloud默认该配置是 60s)
     eviction-interval-timer-in-ms: 120000 #默认90秒
 # log配置
 logging:

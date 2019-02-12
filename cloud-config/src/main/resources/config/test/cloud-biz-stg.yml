@@ -61,3 +61,10 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+
+info:
+  app.name: weisg-microcloud
+  company.name: www.weisg.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
