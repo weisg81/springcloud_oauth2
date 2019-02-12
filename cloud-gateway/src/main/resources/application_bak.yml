@@ -1,0 +1,33 @@
+#server:
+#  port: 8002
+#spring:
+#  application:
+#    name: cloud-gateway
+#
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:7001/eureka/
+#  instance:
+#    prefer-ip-address: true
+#    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+#
+#zuul:
+#  prefix: /weisg
+#  ignored-services: "*"
+#  ribbon:
+#      eager-load:
+#        enabled: true
+#        clients: cloud-biz
+#  routes:
+#    biz:
+#      path: /mybiz/**
+#      service-id: cloud-biz
+#      stripPrefix: true
+#      retryable: false
+#
+#
+#
+#
+#

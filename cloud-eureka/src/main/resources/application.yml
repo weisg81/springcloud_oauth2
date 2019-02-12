@@ -1,0 +1,41 @@
+server:
+  port: 7001
+spring:
+  application:
+    name: cloud-eureka
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
+eureka:
+  instance:
+    hostname: localhost #eureka服务端的实例名称
+  client:
+    register-with-eureka: false #false表示不向注册中心注册自己。
+    fetch-registry: false #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server: #配置属性，但由于 Eureka 自我保护模式以及心跳周期长的原因，经常会遇到 Eureka Server 不剔除已关停的节点的问题
+    enable-self-preservation: true
+    eviction-interval-timer-in-ms: 120000 #默认90秒
+
+---
+spring:
+  profiles: stg
+eureka:
+  instance:
+    hostname: localhost #eureka服务端的实例名称
+  client:
+    register-with-eureka: false #false表示不向注册中心注册自己。
+    fetch-registry: false #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server: #配置属性，但由于 Eureka 自我保护模式以及心跳周期长的原因，经常会遇到 Eureka Server 不剔除已关停的节点的问题
+    enable-self-preservation: true
+    eviction-interval-timer-in-ms: 120000 #默认90秒
+# log配置
+logging:
+  level:
+    root: INFO
+    pers.weisg.cloud: INFO

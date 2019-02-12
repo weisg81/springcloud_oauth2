@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: cloud-biz
+  profiles:
+    active: stg
+---
+spring:
+  profiles: stg
+  cloud:
+    config:
+#      name: cloud-gateway-stg #需要从配置服务上读取的资源名称，注意没有yml后缀名
+      label: test
+      uri: http://localhost:8001 #SpringCloudConfig获取的服务地址
+
+---
+spring:
+  profiles: pro
+  cloud:
+    config:
+#      name: cloud-gateway-stg #需要从配置服务上读取的资源名称，注意没有yml后缀名
+      label: pro
+      uri: http://localhost:8001 #SpringCloudConfig获取的服务地址

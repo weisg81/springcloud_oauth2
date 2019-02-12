@@ -1,0 +1,6 @@
+#config 默认Git加载
+#通过spring.cloud.config.server.git.uri指定配置信息存储的git地址，比如：https://github.com/**
+#加载本地开发环境 spring.profiles.active=native
+#加载 本地物理环境 spring.cloud.config.server.native.searchLocations=file:E:\\Java\\Workspaces\\sts\\doc\\file\\config
+#加载svn环境 spring.cloud.config.server.svn.uri=http://localhost:8888/dmeo/development/trunk
+#特别注意  svn 环境 需要 引入 SVN jar包

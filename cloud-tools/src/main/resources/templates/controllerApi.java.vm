@@ -1,0 +1,95 @@
+package $!{package.Controller};
+import java.util.Map;
+import java.util.Date;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import pers.weisg.cloud.common.core.util.Query;
+import pers.weisg.cloud.common.core.util.ApiResult;
+import io.swagger.annotations.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import $!{package.Entity}.$!{entity};
+import $!{package.Service}.I$!{entity}Service;
+#if($!{superControllerClassPackage})
+import $!{superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author $!{author}
+ * @since $!{date}
+ */
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "$!{date}")
+
+@Api(value = "$!{package.ModuleName}", description = "The $!{table.comment} API")
+@RequestMapping("/$!{table.entityPath}")
+public interface $!{table.controllerName}Api{
+
+    /**
+    * 通过ID查询
+    *
+    * @param id ID
+    * @return $!{entity}
+    */
+    @ApiOperation(value = "通过ID查询", nickname = "通过ID查询", notes = "通过ID查询", response = ApiResult.class, tags = {
+            "$!{package.ModuleName}", })
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "success", response = ApiResult.class),
+            @ApiResponse(code = 400, message = "Invalid service supplied"),
+            @ApiResponse(code = 404, message = "request not found") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "通过ID查询", required = true, dataType = "String")
+    })
+    @GetMapping("/{id}")
+    public ApiResult<$!{entity}> get(@PathVariable Integer id) ;
+
+    /**
+     * 添加
+     * @param  $!{table.entityPath}  实体
+     * @return success/false
+     */
+    @ApiOperation(value = "分页查询信息", nickname = "分页查询信息", notes = "分页查询信息", response = ApiResult.class, tags = {
+            "$!{package.ModuleName}", })
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "success", response = ApiResult.class),
+            @ApiResponse(code = 400, message = "Invalid service supplied"),
+            @ApiResponse(code = 404, message = "request not found") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "$!{table.entityPath}", value = "分页查询信息", required = true, dataType = "$!{entity}")
+    })
+    @PostMapping
+    public ApiResult<Boolean> add(@RequestBody $!{entity} $!{table.entityPath});
+
+    /**
+     * 删除
+     * @param id ID
+     * @return success/false
+     */
+    @ApiOperation(value = "删除", nickname = "删除", notes = "删除", response = ApiResult.class, tags = {
+            "$!{package.ModuleName}", })
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "success", response = ApiResult.class),
+            @ApiResponse(code = 400, message = "Invalid service supplied"),
+            @ApiResponse(code = 404, message = "request not found") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "删除", required = true, dataType = "String")
+    })
+    @DeleteMapping("/{id}")
+    public ApiResult<Boolean> delete(@PathVariable Integer id);
+
+    /**
+     * 编辑
+     * @param  $!{table.entityPath}  实体
+     * @return success/false
+     */
+    @ApiOperation(value = "编辑", nickname = "编辑", notes = "编辑", response = ApiResult.class, tags = {
+            "$!{package.ModuleName}", })
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "success", response = ApiResult.class),
+            @ApiResponse(code = 400, message = "Invalid service supplied"),
+            @ApiResponse(code = 404, message = "request not found") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "$!{table.entityPath}", value = "编辑", required = true, dataType = "$!{entity}")
+    })
+    @PutMapping
+    public ApiResult<Boolean> edit(@RequestBody $!{entity} $!{table.entityPath});
+}

@@ -1,0 +1,79 @@
+package $!{package.Controller};
+import java.util.Map;
+import java.util.Date;
+import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import pers.weisg.cloud.common.core.util.Query;
+import pers.weisg.cloud.common.core.util.ApiResult;
+import pers.weisg.cloud.common.core.util.ApiResultUtil;
+import $!{package.Entity}.$!{entity};
+import $!{package.Service}.$!{entity}Service;
+import $!{package.Controller}.api.$!{table.controllerName};
+#if($!{superControllerClassPackage})
+import $!{superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author $!{author}
+ * @since $!{date}
+ */
+@Slf4j
+@RestController
+@RequestMapping("/$!{table.entityPath}")
+public class $!{table.controllerName} implements $!{table.controllerName}Api  {
+    @Autowired private $!{entity}Service $!{table.entityPath}Service;
+
+    /**
+    * 通过ID查询
+    *
+    * @param id ID
+    * @return $!{entity}
+    */
+    @GetMapping("/{id}")
+    public ApiResult<$!{entity}> get(@PathVariable Integer id) {
+        return ApiResultUtil.ok($!{table.entityPath}Service.selectById(id));
+    }
+
+    /**
+     * 添加
+     * @param  $!{table.entityPath}  实体
+     * @return success/false
+     */
+    @PostMapping
+    public ApiResult<Boolean> add(@RequestBody $!{entity} $!{table.entityPath}) {
+        return ApiResultUtil.ok($!{table.entityPath}Service.save($!{table.entityPath}));
+    }
+
+    /**
+     * 删除
+     * @param id ID
+     * @return success/false
+     */
+    @DeleteMapping("/{id}")
+    public ApiResult<Boolean> delete(@PathVariable Integer id) {
+        $!{entity} $!{table.entityPath} = new $!{entity}();
+        #*$!{table.entityPath}.setId(id);
+        $!{table.entityPath}.setUpdateTime(LocalDateTime.now());
+        $!{table.entityPath}.setDelFlag(CommonConstant.STATUS_DEL);*#
+        return ApiResultUtil.ok($!{table.entityPath}Service.updateById($!{table.entityPath}));
+    }
+
+    /**
+     * 编辑
+     * @param  $!{table.entityPath}  实体
+     * @return success/false
+     */
+    @PutMapping
+    public ApiResult<Boolean> edit(@RequestBody $!{entity} $!{table.entityPath}) {
+        $!{table.entityPath}.setUpdateTime(new Date());
+        return ApiResultUtil.ok($!{table.entityPath}Service.updateById($!{table.entityPath}));
+    }
+}
